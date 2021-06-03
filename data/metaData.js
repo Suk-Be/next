@@ -10,5 +10,9 @@ export const metaData = {
   consuming: {
     siteTitle: 'Consuming rest apis',
     contentDescription: 'How to consume APIs with React'
+  },
+  hooks: {
+    siteTitle: 'Learning hooks',
+    contentDescription: 'React, states and life-cycles'
   }
 }

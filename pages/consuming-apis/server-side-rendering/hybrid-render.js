@@ -16,6 +16,8 @@ function Page({ meta: {consuming}, posts }) {
     headline: null
   })
 
+  // data todos is requested on the clientside
+  // setAppState function gets applied when component gets updated and mounted
   useEffect(() => {
     setAppState({loading: true})
     const apiURL = restURIs.todos
@@ -23,7 +25,10 @@ function Page({ meta: {consuming}, posts }) {
     fetch(apiURL)
       .then(res => res.json())
       .then(todos => {
-        setAppState({loading: false, todos: todos, headline: 'Todos'})
+        setAppState({
+          loading: false,
+          todos: todos,
+          headline: 'Todos'})
       })
   }, [setAppState])
 
@@ -54,6 +59,7 @@ function Page({ meta: {consuming}, posts }) {
 }
 
 // This gets called on every request
+// Posts data is generated on the server
 export async function getServerSideProps() {
   const res = await fetch(restURIs.posts)
   const posts = await res.json()

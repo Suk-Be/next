@@ -23,7 +23,7 @@ export async function getStaticProps(){
 export default function Home({
   meta: { home },
   localPosts
-  }) {
+}) {
   return (
     <Layout home siteMetaContent={home}>
       <Head>
@@ -42,6 +42,7 @@ export default function Home({
         <h2 className={utilStyles.headingLg}>
           Blog
         </h2>
+        <p>Pages and routes are dynamically created from md files</p>
         <ul className={utilStyles.list}>
           {
             localPosts.map(({id, date, title}) => (
@@ -60,93 +61,135 @@ export default function Home({
       </section>
       <hr />
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+        <h1 className={utilStyles.headingXl}>
+          Experimenting with next.js
+        </h1>
         <h2 className={utilStyles.headingLg}>
-          Pre-Rendering and Client-Side-Rendering
+          Renderings
         </h2>
-        <h3 className={utilStyles.headingMd}>Pre-Rendering on Server (getStaticProps)</h3>
+        <p>
+          Best practices tasks like rendering, states, life-cycle, routing
+        </p>
+        <h3 className={utilStyles.headingMd}>
+          Pre-Rendering on the sever
+        </h3>
+        <h4 className={utilStyles.headingSm}>getStaticProps</h4>
+        <p>
+          Fetch data at build time.
+        </p>
         <ul>
           <li className={utilStyles.listItem}>
             <Link href={`/consuming-apis/static-rendering/component`}>
               <a>static-rendered component</a>
             </Link>
-            <br />
-            <small className={utilStyles.lightText}>
-              <time dateTime='2020-09-01 19:00'>January 9, 2020</time>
-            </small>
           </li>
         </ul>
-        <h3 className={utilStyles.headingMd}>Pre-Rendering on Server (getStaticProps/getServerSideProps)</h3>
+        <h4 className={utilStyles.headingSm}>getServerSideProps</h4>
+        <p>
+          Fetch data on each request.
+        </p>
         <ul>
           <li className={utilStyles.listItem}>
             <Link href={`/consuming-apis/server-side-rendering/component`}>
-              <a>component pre-rendered with getServerSideProps </a>
+              <a>component pre-rendered with getServerSideProps</a>
             </Link>
-            <br />
-            <small className={utilStyles.lightText}>
-              <time dateTime='2020-11-01 19:00'>January 11, 2020</time>
-            </small>
-          </li>
-          <li className={utilStyles.listItem}>
-            <Link href={`/consuming-apis/server-side-rendering/hybrid-render`}>
-              <a>hybrid component pre-rendered and additionally consuming rest api with a hook</a>
-            </Link>
-            <br />
-            <small className={utilStyles.lightText}>
-              <time dateTime='2020-10-01 19:00'>January 10, 2020</time>
-            </small>
           </li>
           <li className={utilStyles.listItem}>
             <Link href={`/consuming-apis/server-side-rendering/swr`}>
               <a>component pre-rendered and listened on with a tool called swr to manage permanent updates</a>
             </Link>
+          </li>
+        </ul>
+        <h4 className={utilStyles.headingSm}>getStaticPaths</h4>
+        <p>
+          Specify dynamic routes to pre-render pages based on data.
+        </p>
+        <ul>
+          <li className={utilStyles.listItem}>
+            <Link href={`https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation`}>
+              <a>Interesting concept for automating an infinite amount of pages and page data.</a>
+            </Link>
             <br />
             <small className={utilStyles.lightText}>
-              <time dateTime='2020-10-01 19:00'>January 10, 2020</time>
+              FYI: concept not implemented
             </small>
           </li>
         </ul>
-        <h3 className={utilStyles.headingMd}>Client side rendered (slower than next.js pre-rendering)</h3>
+        <h3 className={utilStyles.headingMd}>
+          Fetching and rendering on the client
+        </h3>
+        <h4 className={utilStyles.headingSm}>according to next.js this method is slower than pre-rendering on the server</h4>
+        <p>No pre-rendering here</p>
         <ul>
           <li className={utilStyles.listItem}>
             <Link href={`/consuming-apis/client-side-rendering/component`}>
               <a>consuming rest api with react hook</a>
             </Link>
-            <br />
-            <small className={utilStyles.lightText}>
-              <time dateTime='2020-13-01 19:00'>January 13, 2020</time>
-            </small>
           </li>
           <li className={utilStyles.listItem}>
             <Link href={`/consuming-apis/client-side-rendering/class-component`}>
               <a>consuming rest api with component did mount</a>
             </Link>
-            <br />
-            <small className={utilStyles.lightText}>
-              <time dateTime='2020-12-01 19:00'>January 12, 2020</time>
-            </small>
+          </li>
+        </ul>
+        <h3 className={utilStyles.headingMd}>
+          Combining Pre-Rendering and Client-Side-Rendering
+        </h3>
+        <h4 className={utilStyles.headingSm}>on page load</h4>
+        <p>Pre-rendering page data and fetching data on client build time</p>
+        <ul>
+          <li className={utilStyles.listItem}>
+            <Link href={`/consuming-apis/server-side-rendering/hybrid-render`}>
+              <a>hybrid component pre-rendered and additionally consuming rest api with a hook</a>
+            </Link>
+          </li>
+        </ul>
+        <h4 className={utilStyles.headingSm}>on click</h4>
+        <p>Pre-rendering page data and fetching data on button click</p>
+        <ul>
+          <li className={utilStyles.listItem}>
+            <Link href={`/hooks/customUseEffect`}>
+              <a>basic managing of four states with a boilerplate component</a>
+            </Link>
           </li>
         </ul>
       </section>
       <hr />
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <h2 className={utilStyles.headingLg}>
+        <h1 className={utilStyles.headingXl}>
           Router API
-        </h2>
-        <h3 className={utilStyles.headingMd}>href semantics for routing</h3>
+        </h1>
+        <h2 className={utilStyles.headingMd}>use href for semantic reasons</h2>
+        <p>and next.js Link component for technical reasons</p>
         <ul>
           <li className={utilStyles.listItem}>
-            <Link href={`/router/about`}>
-              <a>About</a>
+            <Link href={`/router`}>
+              <a>Dynamic Routes with next.js useRouter</a>
+            </Link>
+          </li>
+        </ul>
+      </section>
+      <hr />
+      <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
+        <h1 className={utilStyles.headingXl}>
+          API Routes
+        </h1>
+        <h2 className={utilStyles.headingMd}>providing REST API</h2>
+        <p>handling HTTP requests and responses</p>
+        <ul>
+          <li className={utilStyles.listItem}>
+            <Link href={`/api/helper`}>
+              <a>basic request method and some request status examples implemented</a>
             </Link>
           </li>
           <li className={utilStyles.listItem}>
-            <Link href={`/router/first-link`}>
-              <a>First Link</a>
+            <Link href={`/api/posts`}>
+              <a>static route post</a>
             </Link>
           </li>
           <li className={utilStyles.listItem}>
-            <Link href={`/router/second-link`}>
-              <a>Second Link</a>
+            <Link href={`/api/posts/comments`}>
+              <a>static route posts/comment</a>
             </Link>
           </li>
         </ul>

@@ -1,49 +1,45 @@
-import { useRouter } from 'next/router'
-import Link from 'next/link'
-import restURIs from '../../data/restURIs'
-import Layout from '../../components/Layout'
-import { metaData as meta } from '../../data/metaData'
-import Head from 'next/head'
-import Router from '../../components/Router'
+import Link from "next/link";
 
-const Post = ({ meta: {consuming}, posts }) => {
-  return (
-    <Layout siteMetaContent={consuming}>
-      <Head>
-        <title>
-          { posts.title }
-        </title>
-      </Head>
-      <div className="repo-container">
-        <Router posts={posts} />
-      </div>
-      <footer>
-        <div className="footer">
-          Built{' '}
-          <span role='img' aria-label='love'>
-            💚
-          </span>{' '}
-          with by Suk-Be Jang
-        </div>
-      </footer>
-    </Layout>
-  )
-}
+const cityList = [
+  {
+    country: "USA",
+    city: "NewYork",
+  },
+  {
+    country: "Spain",
+    city: "Madrid",
+  },
+  {
+    country: "England",
+    city: "London",
+  },
+];
 
-export async function getStaticProps() {
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
-  const res = await fetch(restURIs.posts)
-  const posts = await res.json()
+const Index = () => (
+  <>
+    <div>
+      <Link href="/">
+        <a>Main</a>
+      </Link>
+    </div>
+    <hr />
+    <ul>
+      {
+        cityList.map((item, index) => {
+          return (
+            <li key={index}>
+              <Link as={`router/${item.country}/${item.city}`} href="router/[country]/[city]">
+                <a>
+                  {item.country}-{item.city}
+                </a>
+              </Link>
+            </li>
+          )
+        })
+      }
 
-  // By returning { props: { posts } }, the Blog component
-  // will receive `posts` as a prop at build time
-  return {
-    props: {
-      meta,
-      posts,
-    },
-  }
-}
+    </ul>
+  </>
+);
 
-export default Post
+export default Index;
